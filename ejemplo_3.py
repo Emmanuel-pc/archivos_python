@@ -26,8 +26,29 @@ def altura_promedio(genero):
     #   el promedio al terminar el bucle
 
     # --- Comience aquí a desarrollar su código ---
+    total_altura = 0
+    cant_personas = 0
+    with open("alturas.csv") as csvfile:
+        alturas = list(csv.DictReader(csvfile))
+
+    for i in range(len(alturas)):
+        if alturas[i].get("genero") == genero:
+            total_altura += float(alturas[i].get("altura"))
+            cant_personas += 1
+    if cant_personas > 0:
+        promedio = total_altura / cant_personas
+        print("Total Altura: ", total_altura)
+        print(f"Cant. Personas del genero {genero} es: {cant_personas} ")
+        print("Promedio es: ", promedio)
+    else:
+        print("Algo paso...")
+
+
+
+
 
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
-    altura_promedio("femenino")
+    genero = str(input("Ingresa el genero: ")).lower()
+    altura_promedio(genero)
